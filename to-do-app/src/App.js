@@ -1,12 +1,7 @@
+import ListGroup from "./components/ListGroup.tsx";
 
-import './App.css';
-
-const App() => {
-  return (
-    <div className="App">
-      <h1>Hello</h1>
-    </div>
-  );
+function App() {
+    return <div> <ListGroup/> </div> 
 }
 
 export default App;
