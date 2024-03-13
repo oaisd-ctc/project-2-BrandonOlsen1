@@ -11,3 +11,26 @@
   text-align: center;
   
 }
+
+.button {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.button:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.button:active {
+  background-color: #0056b3;
+  border-color: #0056b3;
+  color: #ffffff;
+}
