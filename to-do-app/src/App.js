@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import mongofunctions from './mongofunctions.js'
 import "./App.css";
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
   return (
     <div className="to-do-form">
       <div className="header">
-        <h1> To do's </h1>
+        <h1>To do's</h1>
       </div>
       <MyForm addTask={addTask} />
       <ListOfTasks tasks={myTasks} />
@@ -63,7 +64,10 @@ function ListOfTasks({ tasks }) {
         return (
           <div id="todoitem" key={index}>
             <p>{task}</p>
-            <button onClick={() => handleComplete(index)} type="button">
+            <button onClick={() => handleComplete(index)} type="button" style={{
+                backgroundColor: "#28a745",
+                
+              }} >
               Complete
             </button>
             <button onClick={() => handleDelete(index)} type="button">
