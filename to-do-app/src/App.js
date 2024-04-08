@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TaskList from "./db.js";
 import "./App.css";
 
 function App() {
@@ -21,11 +22,19 @@ function App() {
 
 function MyForm({ addTask }) {
   const [task, setTask] = useState("");
+  const [category, setCategory] = useState("Home");
+  const [errors, setErrors] = useState({ task: false, category: false });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addTask(task);
-    setTask("");
+    if (!task) {
+      setErrors((prevErrors) => ({ ...prevErrors, task: true }));
+    } else {
+      addTask({ task, category });
+      setTask("");
+      setCategory("Home");
+      setErrors({ task: false, category: false });
+    }
   };
 
   return (
@@ -35,7 +44,18 @@ function MyForm({ addTask }) {
         id="inputed-to-dos"
         value={task}
         onChange={(e) => setTask(e.target.value)}
+        placeholder="Enter task..."
+        className={errors.task ? "error" : ""}
       />
+      <select
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        className={errors.category ? "error" : ""}
+      >
+        <option value="Home">Home</option>
+        <option value="School">School</option>
+        <option value="Work">Work</option>
+      </select>
       <input type="submit" value="Submit" />
     </form>
   );
@@ -52,21 +72,25 @@ function ListOfTasks({ tasks }) {
   const handleDelete = (index) => {
     setDeletedTasks([...deletedTasks, index]);
   };
+   
 
   return (
     <div id="listoftasks">
+
       {tasks.map((task, index) => {
         if (deletedTasks.includes(index) || completedTasks.includes(index)) {
           return null;
         }
-        const isCompleted = completedTasks.includes(index);
         return (
           <div id="todoitem" key={index}>
-            <p>{task}</p>
-            <button onClick={() => handleComplete(index)} type="button" style={{
+            <p>{task.task}</p>
+            <button
+              onClick={() => handleComplete(index)}
+              type="button"
+              style={{
                 backgroundColor: "#28a745",
-                
-              }} >
+              }}
+            >
               Complete
             </button>
             <button onClick={() => handleDelete(index)} type="button">
@@ -85,7 +109,7 @@ function ListOfTasks({ tasks }) {
           if (completedTasks.includes(index) && !deletedTasks.includes(index)) {
             return (
               <div id="completeditem" key={index}>
-                <p>{task}</p>
+                <p>{task.task}</p>
                 <button onClick={() => handleDelete(index)} type="button">
                   Delete
                 </button>

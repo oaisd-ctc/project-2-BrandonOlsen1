@@ -1,26 +1,26 @@
+// TaskList.js
+import React, { useState, useEffect } from 'react';
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://user2000:e5B6vx3g@todoapp.pgn3aq6.mongodb.net/?retryWrites=true&w=majority&appName=ToDoApp";
+function TaskList() {
+  const [tasks, setTasks] = useState([]);
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
+  useEffect(() => {
+    fetch('http://localhost:5000/api/tasks')
+      .then(response => response.json())
+      .then(data => setTasks(data))
+      .catch(error => console.error("Error fetching data:", error));
+  }, []);
 
-async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
+  return (
+    <div>
+      <h1>Tasks</h1>
+      <ul>
+        {tasks.map(task => (
+          <li key={task._id}>{task.taskName}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
-run().catch(console.dir);
+
+export default TaskList;
