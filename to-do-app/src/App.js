@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import TaskList from "./db.js";
 import "./App.css";
+
 
 function App() {
   const [myTasks, setMyTasks] = useState([]);
-
   const addTask = (task) => {
     setMyTasks([...myTasks, task]);
   };
@@ -72,11 +71,9 @@ function ListOfTasks({ tasks }) {
   const handleDelete = (index) => {
     setDeletedTasks([...deletedTasks, index]);
   };
-   
 
   return (
     <div id="listoftasks">
-
       {tasks.map((task, index) => {
         if (deletedTasks.includes(index) || completedTasks.includes(index)) {
           return null;
@@ -99,12 +96,11 @@ function ListOfTasks({ tasks }) {
           </div>
         );
       })}
-
       <div id="listofcompletetask">
         <br />
         <br />
         <br />
-        <h2> Completed Tasks </h2>
+        <h2>Completed Tasks</h2>
         {tasks.map((task, index) => {
           if (completedTasks.includes(index) && !deletedTasks.includes(index)) {
             return (
@@ -116,6 +112,7 @@ function ListOfTasks({ tasks }) {
               </div>
             );
           }
+          return null; // Add this line to handle no return value warning
         })}
       </div>
     </div>
