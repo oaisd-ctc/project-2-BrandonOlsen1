@@ -1,34 +1,37 @@
-// import MongoClient from 'mongodb';
-// const uri = "mongodb+srv://brolc79:e5B6vx3g@todoapp.pgn3aq6.mongodb.net/?retryWrites=true&w=majority&appName=ToDoApp";
+const { MongoClient } = require('mongodb');
 
-//  async function fetchData() {
-//   const client = new MongoClient(uri);
+const uri = "mongodb+srv://brolc79:e5B6vx3g@todoapp.pgn3aq6.mongodb.net/?retryWrites=true&w=majority&appName=ToDoApp";
 
-//   try {
-//     await client.connect();
+async function fetchData() {
+  const client = new MongoClient(uri);
 
-//     const database = client.db("todoapp");
-//     const collection = database.collection("tasks");
+  try {
+    await client.connect();
 
-//     // Find all documents in the collection
-//     const cursor = collection.find({});
+    const database = client.db("todoapp");
+    const collection = database.collection("tasks");
 
-//     // Convert cursor to array of documents
-//     const documents = await cursor.toArray();
+    // Find all documents in the collection
+    const cursor = collection.find({});
 
-//     return documents; // Return documents as JSON
+    // Convert cursor to array of documents
+    const documents = await cursor.toArray();
 
-//   } finally {
-//     // Ensure the client is closed
-//     await client.close();
-//   }
-// }
+    return documents; // Return documents as JSON
 
-export default async function run() {
-//   try {
-//     const data = await fetchData();
-//     console.log(JSON.stringify(data, null, 2)); // Print JSON to console
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//   }
+  } finally {
+    // Ensure the client is closed
+    await client.close();
+  }
 }
+
+async function run() {
+  try {
+    const data = await fetchData();
+    console.log(JSON.stringify(data, null, 2)); // Print JSON to console
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+run();
+module.exports = fetchData;
