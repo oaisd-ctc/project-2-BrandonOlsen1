@@ -1,0 +1,12 @@
+.home {
+    background-image: url('../img/Home.jpeg');
+    height: 28vh;
+}
+.school {
+    background-image: url('../img/School.jpg');
+    height: 28vh;
+}
+.work {
+    background-image: url('../img/Work5.webp');
+    height: 28vh;
+}

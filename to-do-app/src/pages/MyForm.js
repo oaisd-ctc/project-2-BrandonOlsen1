@@ -27,15 +27,7 @@ function MyForm({ addTask }) {
         placeholder="Enter task..."
         className={errors.task ? "error" : ""}
       />
-      <select
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        className={errors.category ? "error" : ""}
-      >
-        <option value="Home">Home</option>
-        <option value="School">School</option>
-        <option value="Work">Work</option>
-      </select>
+      
       <input type="submit" value="Submit" />
     </form>
   );
