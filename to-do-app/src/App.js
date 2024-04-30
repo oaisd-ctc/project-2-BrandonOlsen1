@@ -2,20 +2,17 @@ import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MyForm from './pages/MyForm';
 import ListOfTasks from './pages/ListOfTasks';
-import './Styles/App.css'; // Import your CSS file if needed
+import './Styles/App.css'; 
 import NavBar from './pages/NavBar';
 import Home from './pages/Home';
 import Work from './pages/Work';
 import School from './pages/School';
-
-
 function App() {
   const [myTasks, setMyTasks] = useState([]);
 
   const addTask = (task) => {
     setMyTasks([...myTasks, task]);
   };
-
   return (
     <BrowserRouter>
       <div className="to-do-form">
@@ -35,5 +32,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;
