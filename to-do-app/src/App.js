@@ -9,7 +9,6 @@ import Work from './pages/Work';
 import School from './pages/School';
 function App() {
   const [myTasks, setMyTasks] = useState([]);
-
   const addTask = (task) => {
     setMyTasks([...myTasks, task]);
   };
